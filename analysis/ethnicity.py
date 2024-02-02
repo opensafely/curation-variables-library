@@ -99,35 +99,35 @@ ethnicity_gp_and_sus_16_category = case(
     ).then("Asian or Asian British - Indian"),
     when(
         (ethnicity_16_category == "9")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["I"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["J"])))
     ).then("Asian or Asian British - Pakistani"),
     when(
         (ethnicity_16_category == "10")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["J"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["K"])))
     ).then("Asian or Asian British - Bangladeshi"),
     when(
         (ethnicity_16_category == "11")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["K"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["L"])))
     ).then("Asian or Asian British - Any other Asian background"),
     when(
         (ethnicity_16_category == "12")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["L"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["M"])))
     ).then("Black or Black British - Caribbean"),
     when(
         (ethnicity_16_category == "13")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["M"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["N"])))
     ).then("Black or Black British - African"),
     when(
         (ethnicity_16_category == "14")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["N"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["P"])))
     ).then("Black or Black British - Any other Black background"),
     when(
         (ethnicity_16_category == "15")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["O"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["R"])))
     ).then("Other Ethnic Groups - Chinese"),
     when(
         (ethnicity_16_category == "16")
-        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["P"])))
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["S"])))
     ).then("Other Ethnic Groups - Any other ethnic group"),
     otherwise="Missing",
 )
