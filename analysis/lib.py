@@ -1,29 +1,19 @@
-from ehrql import create_dataset, case, when, codelist_from_csv
-from ehrql.tables.tpp import clinical_events, practice_registrations, ethnicity_from_sus
+import polars as pl
+from IPython.display import display, display_markdown
 
 
-dataset = create_dataset()
+def get_dataset():
+    dataset = pl.read_ipc("../output/dataset.arrow")
+    dataset = dataset.drop("patient_id")
+    return dataset
 
-index_date = "2020-03-31"
 
-has_registration = practice_registrations.for_patient_on(
-    index_date
-).exists_for_patient()
-
-dataset.define_population(has_registration)
-
-ethnicity_6_category_codelist = codelist_from_csv(
-    "codelists/opensafely-ethnicity-snomed-0removed.csv",
-    column="snomedcode",
-    category_column="Grouping_6",
-)
-
-ethnicity_16_category_codelist = codelist_from_csv(
-    "codelists/opensafely-ethnicity-snomed-0removed.csv",
-    column="snomedcode",
-    category_column="Grouping_16",
-)
-
+descriptions = {
+    "ethnicity_6_category": """
+## 5 Category ethnicity
+**This text describes the variable**
+### It is defined using the following ehrQL:
+```
 ethnicity_6_category = (
     clinical_events.where(
         clinical_events.snomedct_code.is_in(ethnicity_6_category_codelist)
@@ -32,8 +22,13 @@ ethnicity_6_category = (
     .last_for_patient()
     .snomedct_code.to_category(ethnicity_6_category_codelist)
 )
-dataset.ethnicity_6_category = ethnicity_6_category
-
+```
+""",
+    "ethnicity_16_category": """
+## 16 Category ethnicity
+**This text describes the variable**
+### It is defined using the following ehrQL:
+```
 ethnicity_16_category = (
     clinical_events.where(
         clinical_events.snomedct_code.is_in(ethnicity_16_category_codelist)
@@ -42,12 +37,22 @@ ethnicity_16_category = (
     .last_for_patient()
     .snomedct_code.to_category(ethnicity_16_category_codelist)
 )
-dataset.ethnicity_16_category = ethnicity_16_category
+```
+""",
+    "ethnicity_sus": """
+## Ethnicity from SUS
+**This text describes the variable**
 
+### It is defined using the following ehrQL:
+```
 ethnicity_sus = ethnicity_from_sus.code
-
-dataset.ethnicity_sus = ethnicity_sus
-
+```
+""",
+    "ethnicity_gp_and_sus_5_category": """
+## 6 Category ethnicity combined with SUS
+**This text describes the variable**
+### It is defined using the following ehrQL (which includes some variables defined above):
+```
 dataset.ethnicity_gp_and_sus_5_category = case(
     when(
         (ethnicity_6_category == "1")
@@ -77,8 +82,13 @@ dataset.ethnicity_gp_and_sus_5_category = case(
     ).then("Chinese or Other Ethnic Groups"),
     otherwise="Missing",
 )
-
-
+```
+""",
+    "ethnicity_gp_and_sus_16_category": """
+## 6 Category ethnicity combined with SUS
+**This text describes the variable**
+### It is defined using the following ehrQL (which includes some variables defined above):
+```
 dataset.ethnicity_gp_and_sus_16_category = case(
     when(
         (ethnicity_16_category == "1")
@@ -146,6 +156,38 @@ dataset.ethnicity_gp_and_sus_16_category = case(
     ).then("Other Ethnic Groups - Any other ethnic group"),
     otherwise="Missing",
 )
+```
+""",
+}
+
+pl.Config(fmt_str_lengths=60)
 
 
-dataset.configure_dummy_data(population_size=1000)
+def count_by_category(df):
+    for col in df.columns:
+        display_markdown(descriptions[col], raw=True)
+        count_table = df[col].value_counts().sort(col)
+        with pl.Config(tbl_rows=len(count_table)):
+            display(count_table)
+
+
+def crosstab(df, index, column):
+    df = df.with_columns(count=pl.lit(1))
+    crosstab = df.pivot(
+        index=index,
+        columns=column,
+        values="count",
+        aggregate_function="sum",
+    )
+    display(crosstab)
+
+
+def do_all_crosstabs(df):
+    x_list = df.columns
+    y_list = df.columns
+    for x in x_list:
+        for y in y_list:
+            if x != y:
+                display_markdown(f"## Comparing {x} with {y}", raw=True)
+                crosstab(df, x, y)
+        y_list.remove(x)
