@@ -1,0 +1,29 @@
+<h1>Defining 5 Category ethnicity</h1>
+
+Test text.
+
+<pre>
+    <code class="sum">
+        
+    ethnicity_6_category = (
+    clinical_events.where(
+        clinical_events.snomedct_code.is_in(ethnicity_6_category_codelist)
+    )
+    .sort_by(clinical_events.date)
+    .last_for_patient()
+    .snomedct_code.to_category(ethnicity_6_category_codelist)
+    )
+    
+    </code>
+</pre>
+
+
+<h2>Counds for 5 Category ethnicity</h2>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (6, 2)</small><table border="1" class="dataframe"><thead><tr><th>ethnicity_6_category</th><th>count</th></tr><tr><td>cat</td><td>u32</td></tr></thead><tbody><tr><td>null</td><td>61</td></tr><tr><td>&quot;5&quot;</td><td>244</td></tr><tr><td>&quot;4&quot;</td><td>171</td></tr><tr><td>&quot;3&quot;</td><td>170</td></tr><tr><td>&quot;2&quot;</td><td>74</td></tr><tr><td>&quot;1&quot;</td><td>280</td></tr></tbody></table></div>

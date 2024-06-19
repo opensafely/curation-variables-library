@@ -1,0 +1,88 @@
+<h1>Defining 16 Category ethnicity combined with SUS</h1>
+
+Test text.
+
+<pre>
+    <code class="sum">
+        
+    dataset.ethnicity_gp_and_sus_16_category = case(
+    when(
+        (ethnicity_16_category == "1")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["A"])))
+    ).then("White - British"),
+    when(
+        (ethnicity_16_category == "2")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["B"])))
+    ).then("White - Irish"),
+    when(
+        (ethnicity_16_category == "3")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["C"])))
+    ).then("White - Any other White background"),
+    when(
+        (ethnicity_16_category == "4")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["D"])))
+    ).then("Mixed - White and Black Caribbean"),
+    when(
+        (ethnicity_16_category == "5")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["E"])))
+    ).then("Mixed - White and Black African"),
+    when(
+        (ethnicity_16_category == "6")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["F"])))
+    ).then("Mixed - White and Asian"),
+    when(
+        (ethnicity_16_category == "7")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["G"])))
+    ).then("Mixed - Any other mixed background"),
+    when(
+        (ethnicity_16_category == "8")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["H"])))
+    ).then("Asian or Asian British - Indian"),
+    when(
+        (ethnicity_16_category == "9")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["J"])))
+    ).then("Asian or Asian British - Pakistani"),
+    when(
+        (ethnicity_16_category == "10")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["K"])))
+    ).then("Asian or Asian British - Bangladeshi"),
+    when(
+        (ethnicity_16_category == "11")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["L"])))
+    ).then("Asian or Asian British - Any other Asian background"),
+    when(
+        (ethnicity_16_category == "12")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["M"])))
+    ).then("Black or Black British - Caribbean"),
+    when(
+        (ethnicity_16_category == "13")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["N"])))
+    ).then("Black or Black British - African"),
+    when(
+        (ethnicity_16_category == "14")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["P"])))
+    ).then("Black or Black British - Any other Black background"),
+    when(
+        (ethnicity_16_category == "15")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["R"])))
+    ).then("Other Ethnic Groups - Chinese"),
+    when(
+        (ethnicity_16_category == "16")
+        | ((ethnicity_16_category.is_null()) & (ethnicity_sus.is_in(["S"])))
+    ).then("Other Ethnic Groups - Any other ethnic group"),
+    otherwise="Missing",
+)
+    
+    </code>
+</pre>
+
+
+<h2>Counds for 16 Category ethnicity combined with SUS</h2>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (17, 2)</small><table border="1" class="dataframe"><thead><tr><th>ethnicity_gp_and_sus_16_category</th><th>count</th></tr><tr><td>cat</td><td>u32</td></tr></thead><tbody><tr><td>&quot;White - British&quot;</td><td>55</td></tr><tr><td>&quot;White - Irish&quot;</td><td>29</td></tr><tr><td>&quot;White - Any other White background&quot;</td><td>201</td></tr><tr><td>&quot;Mixed - White and Black Caribbean&quot;</td><td>10</td></tr><tr><td>&quot;Mixed - White and Black African&quot;</td><td>12</td></tr><tr><td>&quot;Mixed - White and Asian&quot;</td><td>8</td></tr><tr><td>&quot;Mixed - Any other mixed background&quot;</td><td>47</td></tr><tr><td>&quot;Asian or Asian British - Indian&quot;</td><td>32</td></tr><tr><td>&quot;Asian or Asian British - Pakistani&quot;</td><td>16</td></tr><tr><td>&quot;Asian or Asian British - Bangladeshi&quot;</td><td>15</td></tr><tr><td>&quot;Asian or Asian British - Any other Asian background&quot;</td><td>114</td></tr><tr><td>&quot;Black or Black British - Caribbean&quot;</td><td>38</td></tr><tr><td>&quot;Black or Black British - African&quot;</td><td>90</td></tr><tr><td>&quot;Black or Black British - Any other Black background&quot;</td><td>50</td></tr><tr><td>&quot;Other Ethnic Groups - Chinese&quot;</td><td>17</td></tr><tr><td>&quot;Other Ethnic Groups - Any other ethnic group&quot;</td><td>233</td></tr><tr><td>&quot;Missing&quot;</td><td>33</td></tr></tbody></table></div>

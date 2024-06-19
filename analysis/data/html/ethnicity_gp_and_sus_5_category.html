@@ -1,0 +1,50 @@
+<h1>Defining 6 Category ethnicity combined with SUS</h1>
+
+Test text.
+
+<pre>
+    <code class="sum">
+        
+    dataset.ethnicity_gp_and_sus_5_category = case(
+    when(
+        (ethnicity_6_category == "1")
+        | ((ethnicity_6_category.is_null()) & (ethnicity_sus.is_in(["A", "B", "C"])))
+    ).then("White"),
+    when(
+        (ethnicity_6_category == "2")
+        | (
+            (ethnicity_6_category.is_null())
+            & (ethnicity_sus.is_in(["D", "E", "F", "G"]))
+        )
+    ).then("Mixed"),
+    when(
+        (ethnicity_6_category == "3")
+        | (
+            (ethnicity_6_category.is_null())
+            & (ethnicity_sus.is_in(["H", "J", "K", "L"]))
+        )
+    ).then("Asian or Asian British"),
+    when(
+        (ethnicity_6_category == "4")
+        | ((ethnicity_6_category.is_null()) & (ethnicity_sus.is_in(["M", "N", "P"])))
+    ).then("Black or Black British"),
+    when(
+        (ethnicity_6_category == "5")
+        | ((ethnicity_6_category.is_null()) & (ethnicity_sus.is_in(["R", "S"])))
+    ).then("Chinese or Other Ethnic Groups"),
+    otherwise="Missing",
+)
+    
+    </code>
+</pre>
+
+
+<h2>Counds for 6 Category ethnicity combined with SUS</h2>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (6, 2)</small><table border="1" class="dataframe"><thead><tr><th>ethnicity_gp_and_sus_5_category</th><th>count</th></tr><tr><td>cat</td><td>u32</td></tr></thead><tbody><tr><td>&quot;White&quot;</td><td>285</td></tr><tr><td>&quot;Mixed&quot;</td><td>77</td></tr><tr><td>&quot;Asian or Asian British&quot;</td><td>177</td></tr><tr><td>&quot;Black or Black British&quot;</td><td>178</td></tr><tr><td>&quot;Chinese or Other Ethnic Groups&quot;</td><td>250</td></tr><tr><td>&quot;Missing&quot;</td><td>33</td></tr></tbody></table></div>
