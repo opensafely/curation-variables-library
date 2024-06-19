@@ -27,8 +27,8 @@ ethnicity_16_category_codelist = codelist_from_csv(
 ```
 
 ## List of ethnicity definitions
-- [Primary care ethnicity 6 category]()
-- [Primary care ethnicity 16 category]()
-- [SUS ethnicity]()
-- [Primary care ethnicity 6 category combined with SUS]()
-- [Primary care ethnicity 16 category combined with SUS]()
+- [Primary care ethnicity 6 category](https://github.com/opensafely/curation-variables-library/blob/mvp-2/analysis/data/html/ethnicity_6_category.html)
+- [Primary care ethnicity 16 category](https://github.com/opensafely/curation-variables-library/blob/mvp-2/analysis/data/html/ethnicity_16_category.html)
+- [SUS ethnicity](https://github.com/opensafely/curation-variables-library/blob/mvp-2/analysis/data/html/ethnicity_sus.html)
+- [Primary care ethnicity 6 category combined with SUS](https://github.com/opensafely/curation-variables-library/blob/mvp-2/analysis/data/html/ethnicity_gp_and_sus_5_category.html)
+- [Primary care ethnicity 16 category combined with SUS](https://github.com/opensafely/curation-variables-library/blob/mvp-2/analysis/data/html/ethnicity_gp_and_sus_16_category.html)
